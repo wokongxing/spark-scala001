@@ -1,0 +1,22 @@
+Exception in thread "main" java.lang.NoClassDefFoundError: scala/Cloneable
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:763)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:467)
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:73)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:368)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:362)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:361)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at main.scala.com.xiaolin.spark01.core01.RDDApp1$.main(RDDApp1.scala:15)
+	at main.scala.com.xiaolin.spark01.core01.RDDApp1.main(RDDApp1.scala)
+Caused by: java.lang.ClassNotFoundException: scala.Cloneable
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 14 more
+	scala版本与spark不一致导致

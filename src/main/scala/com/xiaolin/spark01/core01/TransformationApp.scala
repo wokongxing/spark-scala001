@@ -12,7 +12,6 @@ object TransformationApp {
   def main(args: Array[String]): Unit = {
     val sc = ContextUtils.getSparkContext(this.getClass.getSimpleName)
     val rdd = sc.parallelize(List(1,2,3,4,5))
-
     /**
       * map 处理每一条数据
       * mapPartitions 对每个分区进行处理

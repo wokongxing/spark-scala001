@@ -43,9 +43,11 @@ object EtlSpark {
 
           (domain,date,year,month,day,sizes,ipInfo.province,ipInfo.city,ipInfo.isp)
         } catch {
+
           case e: Exception =>
             e.printStackTrace()
+            (null)
         }
-      })
+      }).filter(x=>x!=null)
   }
 }

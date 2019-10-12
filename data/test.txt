@@ -1,8 +1,8 @@
-q
-e
-d
-d
-e
-c
-a
-a
+q,a
+e,f
+d,g
+d,e
+e,g
+c,e
+a,e
+a,t

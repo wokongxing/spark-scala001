@@ -1,4 +1,4 @@
-package main.scala.com.xiaolin.spark01.utils;
+package com.xiaolin.utils;
 
 
 

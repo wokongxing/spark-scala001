@@ -66,13 +66,25 @@ object SparkSessionApp {
     import spark.implicits._
 
     val df = spark.read.option("header","true")
-        .option("sep",";")
-      .format("csv").load("data/people.csv")
+        .option("sep",",")
+      .format("csv").load("data/area.csv")
     df.printSchema()
-    println("......")
-    df.select("name","age").filter($"age" > 30)
-      .write.format("csv").mode("overwrite")
-      .save("out")
+    val resultdf = df.select("AREAID","PAREAID","AREAPY","ORDERID","ISAPPLY","MODTIME")
+
+    //获取参数配置
+    val config = ConfigFactory.load()
+    val url = config.getString("db.default.url")
+    val user = config.getString("db.default.user")
+    val password = config.getString("db.default.password")
+    val driver = config.getString("db.default.driver")
+
+    val jdbcRdd = resultdf.write.mode(SaveMode.Overwrite).format("jdbc")
+      .option("url",url)
+      .option("dbtable","SYS_AREA")
+      .option("user",user)
+      .option("password",password)
+      .save()
+
   }
 
   def jdbc(spark: SparkSession) = {

@@ -1,0 +1,16 @@
+Spark SQL
+    SQL
+    DF
+    DS
+           SQL        DF             ds
+语法      runtime     compile        compile
+分析     runtime      runtime        compile
+
+select * form emp
+
+Analysis errors reported before a distributed job starts
+
+
+
+
+不允许使用SQL的方式，而是使用API的方式来调用自定义UDF函数

@@ -5,12 +5,12 @@ import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.hadoop.io.NullWritable
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 object SparkWork001 {
-"""
-  Android类型的只要：ruozedata1 182.86.190.207  2271 江西  景德镇
-  iOS类型的只要：ruozedata1 182.86.190.207  2271 江西
-  Symbian类型的只要：182.86.190.207  2271 江西  景德镇
-  ==> 有能力的扩展成可以自定义根据域名配置来生成
-"""
+//"""
+//  Android类型的只要：ruozedata1 182.86.190.207  2271 江西  景德镇
+//  iOS类型的只要：ruozedata1 182.86.190.207  2271 江西
+//  Symbian类型的只要：182.86.190.207  2271 江西  景德镇
+//  ==> 有能力的扩展成可以自定义根据域名配置来生成
+//"""
   def main(args: Array[String]): Unit = {
     val sc = ContextUtils.getSparkContext(this.getClass.getSimpleName)
     var outpath = "outdata/spark01";

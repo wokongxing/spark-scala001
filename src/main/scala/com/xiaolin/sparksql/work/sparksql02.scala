@@ -1,7 +1,7 @@
 package com.xiaolin.sparksql.work
 
 import com.typesafe.config.ConfigFactory
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{SaveMode, SparkSession}
 
 object sparksql02 {
   def main(args: Array[String]): Unit = {
@@ -11,7 +11,7 @@ object sparksql02 {
                   .master("local")
                   .appName(this.getClass.getSimpleName)
                   .getOrCreate()
-    //获取参数配置
+//    //获取参数配置
     val config = ConfigFactory.load()
     val url = config.getString("db.default.url")
     val user = config.getString("db.default.user")
@@ -21,11 +21,16 @@ object sparksql02 {
 
     val jdbcRdd = spark.read.format("jdbc")
       .option("url",url)
-      .option("dbdate",srcTable)
+      .option("dbtable",srcTable)
       .option("user",user)
       .option("password",password)
       .load()
 
-
+    jdbcRdd.write
+      .mode(SaveMode.Overwrite)
+      .option("compression","snappy")
+      .format("parquet")
+      .save("hdfs://hadoop001:9000/outdata/spark/par01")
+    spark.stop();
   }
 }

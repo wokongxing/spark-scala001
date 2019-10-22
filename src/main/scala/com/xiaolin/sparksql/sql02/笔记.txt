@@ -1,0 +1,63 @@
+ETL
+    input:json
+    清洗 ==> ODS  大宽表  HDFS/Hive/SparkSQL
+    output: 列式存储  ORC/Parquet
+
+    Stat
+        ==>  一个非常简单的SQL搞定
+        ==>  复杂：多个SQL 或者 一个复杂SQL搞定
+
+
+列式：Orc Parquet
+    特点：把每一列的数据存放在一起
+    优点：减少IO 需要哪几列就直接获取哪几列
+    缺点：如果你还是要获取每一行中的所有列，那么性能比行式的差
+
+行式：MySQL
+    一条记录有多个列  一行数据是存储在一起的
+    优点：
+        你每次查询都使用到所有的列
+    缺点：
+        大宽表有N多列，但是我们仅仅使用其中几列
+
+
+
+storage format  + compression
+    text
+
+400
+    大：小文件多点、
+    10exe * 2core = 20task  400/20=20轮
+                            600/20=30轮
+
+
+hiveserver2  beeline/jdbc
+thriftserver beeline/jdbc
+
+数据通过UI去访问：HUE/Zeppelin
+    jdbc代码
+    如果你发的SQL是一个计算/统计SQL：返回肯定是需要时间
+    只拿结果，不计算
+
+
+spark on yarn
+    cluster
+        driver是运行在AM里面的
+        AM：AM + Driver   既当爹又当妈
+        客户端退出   ？
+        日志 YARN
+            yarn logs -applicationId <app ID>
+
+    client
+        driver是运行在本地的
+        客户端退出  就退出了
+        AM：负责从YARN上去申请资源
+        日志是在本地的
+
+Spark：Driver + Executors
+
+在Spark on YARN中  是没有Worker的概念，是Standalone中的
+executor是运行在container中的
+
+
+

@@ -1,0 +1,83 @@
+Scala中非常非常非常重要的一个概念：隐式转换
+
+目的：增强（悄无声息、偷偷摸摸）
+
+三种
+    隐式参数
+    隐式类型转换： A ==> B
+        File类中原生的并没有类似于count、read方法
+        但是我们是可以通过隐式转换来增强File中并没有提供的方法
+    隐式类
+
+双刃剑：用的很 赞！！！  用不好  代码执行流程你可能都看不明白
+
+
+
+
+
+
+隐式类型转换
+
+    需求：如何为一个已存在的类添加一个新方法？
+    Java: Proxy
+    Scala: implicit
+
+
+
+
+
+隐式参数
+    方法/函数的参数可以使用implicit
+
+隐式类
+
+
+
+
+
+
+Scala泛型
+
+Java
+    上界（upper bounds） <T extends Test>  T可以是Test的子类型  <? extends Test>
+    下界（lower bounds） <T super Test>    T可以是Test的父类型  <? super Test>
+
+Int并没有实现Comparable接口，所以不能排序
+
+
+逆变和协变
+
+
+
+
+
+
+
+
+
+
+Scala操作JDBC
+    1）pom.xml中要添加jdbc的driver
+    2）代码
+        a) 最基础的写法
+        b）scalikejdbc
+
+
+
+
+
+
+
+create table if not exists offset_storage(
+topic varchar(32),
+groupid varchar(50),
+partitions int,
+offset bigint,
+primary key(topic,groupid,partitions)
+);
+
+insert into offset_storage values("pk","test-pk-group",0,10);
+insert into offset_storage values("pk","test-pk-group",1,11);
+insert into offset_storage values("pk","test-pk-group",2,12);
+
+

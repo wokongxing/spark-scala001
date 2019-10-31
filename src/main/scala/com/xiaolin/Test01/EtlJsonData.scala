@@ -9,7 +9,7 @@ object EtlJsonData {
 
     val spark = SparkSession.builder()
       .appName(this.getClass.getSimpleName)
-      //.master("local")
+      .master("local")
       .getOrCreate()
 
     //自定义函数Udf
@@ -22,7 +22,7 @@ object EtlJsonData {
             data = splits(2)
         }
       }
-      data
+      Some(data).getOrElse(null)
     }
     //自定义函数Udf
     val city = (ip: String) => {
@@ -34,7 +34,7 @@ object EtlJsonData {
           data = splits(3)
         }
       }
-      data
+      Some(data).getOrElse(null)
     }
 
     val getprovince = udf(province)
@@ -46,7 +46,8 @@ object EtlJsonData {
         .withColumn("city",getcity(jsondf("ip")))
         .write.mode(SaveMode.Overwrite)
         .option("compression","snappy")
-        .format("parquet").save("hdfs://hadoop001:9000/outdata/spark/work01")
+        .format("parquet")
+      .save("hdfs://hadoop001:9000/outdata/spark/work01")
     //compression压缩  orc parquet 列式存储
     spark.stop();
   }

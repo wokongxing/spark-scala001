@@ -16,7 +16,7 @@ object RDDApp1 {
 
     // step2: SparkContext
     val sc = new SparkContext(sparkConf)
-
+    sc.textFile("data/test.txt").printInfo()
     // step3: 处理业务逻辑
     //获取数据 对值 进行 年份降序 月份升序 排序
 //    val trafficsRdd = sc.textFile("data/traffics").map(x=>{
@@ -118,14 +118,14 @@ object RDDApp1 {
 
 //分组排序/组内排序
 //  * 求每个域名访问量最大的url的Top N
-    val TOPN = 2
-    val input = sc.textFile("data/site.log")
-    val processRDD = input.map(x => {
-      val splits = x.split(",")
-      val site = splits(0)
-      val url = splits(1)
-      ((site, url), 1)
-    })
+//    val TOPN = 2
+//    val input = sc.textFile("data/site.log")
+//    val processRDD = input.map(x => {
+//      val splits = x.split(",")
+//      val site = splits(0)
+//      val url = splits(1)
+//      ((site, url), 1)
+//    })
 
     // 分而治之的思路
     //    processRDD.filter(_._1._1 == "www.baidu.com")
@@ -144,13 +144,13 @@ object RDDApp1 {
 //      processRDD.filter(_._1._1 == x).reduceByKey(_+_).sortBy(-_._2) .take(TOPN).foreach(println)
 //    })
 
-        processRDD.reduceByKey(_+_)
-          .groupBy(_._1._1)
-            .mapValues(x => {
-              x.toList.sortBy(-_._2)  // toList是一个很大的安全隐患
-                .map(x => (x._1._2, x._2)).take(TOPN)
-            })
-          .printInfo()
+//        processRDD.reduceByKey(_+_)
+//          .groupBy(_._1._1)
+//            .mapValues(x => {
+//              x.toList.sortBy(-_._2)  // toList是一个很大的安全隐患
+//                .map(x => (x._1._2, x._2)).take(TOPN)
+//            })
+//          .printInfo()
 
 
     // 11 % 3 = 2  Kafka分区策略

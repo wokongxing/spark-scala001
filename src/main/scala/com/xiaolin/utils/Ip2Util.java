@@ -17,7 +17,8 @@ public class  Ip2Util {
     }
     public static String getAaddressByIp(String ip){
         //db
-        String dbPath = Ip2Util.class.getResource("/ip2region.db").getPath();
+        //String dbPath = Ip2Util.class.getResource("/ip2region.db").getPath();
+        String dbPath = "/home/hadoop/data/ip2region.db";
 
         File file = new File(dbPath);
 

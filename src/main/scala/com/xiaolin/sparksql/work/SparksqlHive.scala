@@ -22,6 +22,7 @@ object SparksqlHive {
     df.printSchema()
     df.write.mode(SaveMode.Overwrite).saveAsTable("emp")
 
+    //spark.sql(sql2).show(10)
     spark.stop();
   }
 }

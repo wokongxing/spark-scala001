@@ -40,14 +40,17 @@ object EtlJsonData {
     val getprovince = udf(province)
     val getcity = udf(city)
     // ETL: 一定保留原有的数据   最完整
-    val jsondf = spark.read.option("inferSchema","true").format("json").load("hdfs://hadoop001:9000/data/spark/data-test.json")
+    val intput = "hdfs://hadoop001:9000/data/spark/data-test.json"
+    val intput2 = "data/data-test.json"
+    val jsondf = spark.read.option("inferSchema","true").format("json").load(intput2)
     jsondf.select("adorderid","adplatformproviderid","ip","requestmode","processnode","iseffective","isbilling","isbid","iswin")
         .withColumn("province",getprovince(jsondf("ip")))
         .withColumn("city",getcity(jsondf("ip")))
-        .write.mode(SaveMode.Overwrite)
-        .option("compression","snappy")
-        .format("parquet")
-      .save("hdfs://hadoop001:9000/outdata/spark/work01")
+        .show(20)
+        //.write.mode(SaveMode.Overwrite)
+        //.option("compression","snappy")
+        //.format("parquet")
+        //.save("hdfs://hadoop001:9000/outdata/spark/work01")
     //compression压缩  orc parquet 列式存储
     spark.stop();
   }

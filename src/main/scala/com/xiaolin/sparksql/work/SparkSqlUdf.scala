@@ -26,8 +26,9 @@ object SparkSqlUdf {
     //自定义函数Udf 注意 导包
     val getcity = udf(Ip2Util.getAaddressByIp(_:String))
     //创建df
-    val df = spark.createDataFrame(valuerdd,schema)
-    df.select($"domain",getcity($"ip")).show()
+    val df = spark.createDataFrame(valuerdd,schema);
+
+    df.select($"domain",getcity($"ip").as("address"),$"ip").show()
     spark.stop()
   }
 }

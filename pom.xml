@@ -4,6 +4,18 @@
   <artifactId>spark-scala</artifactId>
   <version>1.0</version>
   <inceptionYear>2008</inceptionYear>
+  <repositories>
+    <repository>
+      <id>cloudera</id>
+      <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -12,6 +24,7 @@
     <hadoop.version>2.6.0-cdh5.15.1</hadoop.version>
     <scala.version>2.11.8</scala.version>
     <spark.version>2.4.4</spark.version>
+    <hbase.version>1.2.0-cdh5.15.1</hbase.version>
   </properties>
 
   <dependencies>
@@ -120,6 +133,22 @@
       <version>7.5.1</version>
     </dependency>
 
+
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>${hbase.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-server</artifactId>
+      <version>${hbase.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-common</artifactId>
+      <version>${hbase.version}</version>
+    </dependency>
 
   </dependencies>
 

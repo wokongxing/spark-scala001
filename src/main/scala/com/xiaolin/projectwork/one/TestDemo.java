@@ -1,4 +1,4 @@
-package com.xiaolin.projectwork.one;
+package main.scala.com.xiaolin.projectwork.one;
 
 /**
  * Created by J哥@www.ruozedata.com.

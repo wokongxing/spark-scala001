@@ -1,4 +1,4 @@
-package com.xiaolin.projectwork.one;
+package main.scala.com.xiaolin.projectwork.one;
 
 
 import java.io.Serializable;

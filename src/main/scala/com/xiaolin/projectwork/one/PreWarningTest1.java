@@ -1,4 +1,4 @@
-package com.xiaolin.projectwork.one;
+package main.scala.com.xiaolin.projectwork.one;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -24,7 +24,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Created by J哥@www.ruozedata.com
  * <p>
  * 1.消费kafka json数据转换为DF,然后show()
  */

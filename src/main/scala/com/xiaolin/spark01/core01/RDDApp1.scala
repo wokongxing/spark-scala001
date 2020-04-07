@@ -16,7 +16,7 @@ object RDDApp1 {
 
     // step2: SparkContext
     val sc = new SparkContext(sparkConf)
-    sc.textFile("data/test.txt").printInfo()
+    sc.textFile("data/test.txt")
     // step3: 处理业务逻辑
     //获取数据 对值 进行 年份降序 月份升序 排序
 //    val trafficsRdd = sc.textFile("data/traffics").map(x=>{

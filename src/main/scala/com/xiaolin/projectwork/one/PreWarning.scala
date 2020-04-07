@@ -1,18 +1,14 @@
-package com.xiaolin.projectwork.one
+package main.scala.com.xiaolin.projectwork.one
 
 import java.util.{Calendar, Date}
 
 import com.alibaba.fastjson.JSON
-import com.xiaolin.projectwork.one.PreWarning.BroadcastPrewarn.broadcastPrewarnlist
-import com.xiaolin.utils.JedisUtil
 import com.xiaolin.utils.JedisUtil.getPoolJedis
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.{Row, SQLContext, SparkSession}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import org.apache.kafka.clients.consumer.ConsumerRecord
-import org.apache.kafka.common.TopicPartition
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.streaming.kafka010._
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
@@ -40,6 +36,7 @@ object PreWarning {
   ))
    private var lastUpdatedAt = Calendar.getInstance.getTime //上次time
   def main(args: Array[String]): Unit = {
+
     //获取influx数据库连接
     val influxDB = InfluxDBFactory.connect("http://" + InfluxDBUtils.getInfluxIP + ":" + InfluxDBUtils.getInfluxPORT(true), "admin", "admin")
     val rp = InfluxDBUtils.defaultRetentionPolicy(influxDB.version)

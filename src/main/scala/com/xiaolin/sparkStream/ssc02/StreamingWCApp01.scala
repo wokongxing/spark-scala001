@@ -7,7 +7,7 @@ import org.iq80.leveldb.DB
 import scala.collection.mutable.ListBuffer
 
 /**
-  * 讲师：PK哥   交流群：545916944
+  *
   */
 object StreamingWCApp01 {
 

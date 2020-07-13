@@ -17,7 +17,7 @@ import scala.collection.mutable.ListBuffer
 
 /**
  * 测试用例:
- *    数据从json中,以 Hfile方式导入Hbase
+ *    数据从json中读取,以 Hfile方式导入Hbase
  *    BulkLoad
  *
  * @author linzhy
@@ -48,30 +48,14 @@ object DataHiveToHbaseBulkLoad {
     hadoopConf.set("fs.defaultFS", hdfsRootPath)
     hadoopConf.set("dfs.client.use.datanode.hostname","true");
     val fileSystem = FileSystem.get(hadoopConf)
-
-    val hbaseConf = HBaseConfiguration.create(hadoopConf)
-    hbaseConf.set(HConstants.ZOOKEEPER_QUORUM, zookeeperQuorum)
-    hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, tableName)
-    //如果导入数据量过大,可以适当修改默认值32
-    hbaseConf.set("hbase.mapreduce.bulkload.max.hfiles.perRegion.perFamily","3200")
-
-    val hbaseConn = ConnectionFactory.createConnection(hbaseConf)
-    val admin = hbaseConn.getAdmin
-    val regionLocator = hbaseConn.getRegionLocator(TableName.valueOf(tableName))
-
-    // 0. 准备程序运行的环境
-    // 如果 HBase 表不存在，就创建一个新表
-    HbaseUtil.createTable(tableName,familyName,admin)
-
     // 如果存放 HFile文件的路径已经存在，就删除掉
     HdfsUtil.deleteFile(hFilePath,fileSystem)
 
-    // 1. 清洗需要存放到 HFile 中的数据，rowKey 一定要排序，否则会报错：
-    // java.io.IOException: Added a key not lexically larger than previous.
-
+    // 清洗需要存放到 HFile 中的数据，rowKey 一定要排序，否则会报错：java.io.IOException: Added a key not lexically larger than previous.
     val dataFrame = spark.read.json(dataSourcePath).select("sessionid","sdkversion","requestdate","email","title")
 
-    val columns = dataFrame.columns.dropWhile(_=="sessionid").sortBy(x=>(x,true)) //排序
+    //去除rowkey字段 ,排序
+    val columns = dataFrame.columns.dropWhile(_=="sessionid").sortBy(x=>(x,true))
 
     //数据处理
     val data = dataFrame.rdd.map(jsonstr => {
@@ -90,7 +74,19 @@ object DataHiveToHbaseBulkLoad {
       }
     ).sortByKey()
 
-     // 2. Save Hfiles on HDFS
+     // Save Hfiles on HDFS
+    val hbaseConf = HBaseConfiguration.create(hadoopConf)
+    hbaseConf.set(HConstants.ZOOKEEPER_QUORUM, zookeeperQuorum)
+    hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, tableName)
+    hbaseConf.set("hbase.mapreduce.bulkload.max.hfiles.perRegion.perFamily","3200")  //如果导入数据量过大,可以适当修改默认值32
+
+    val hbaseConn = ConnectionFactory.createConnection(hbaseConf)
+    val admin = hbaseConn.getAdmin
+    val regionLocator = hbaseConn.getRegionLocator(TableName.valueOf(tableName))
+
+    // 如果 HBase 表不存在，就创建一个新表
+    HbaseUtil.createTable(tableName,familyName,admin)
+
     val table = hbaseConn.getTable(TableName.valueOf(tableName))
     val job = Job.getInstance(hbaseConf)
     job.setMapOutputKeyClass(classOf[ImmutableBytesWritable])
@@ -105,7 +101,7 @@ object DataHiveToHbaseBulkLoad {
       hbaseConf
     )
 
-    //  3. Bulk load Hfiles to Hbase
+    //Bulk load Hfiles to Hbase
     val bulkLoader = new LoadIncrementalHFiles(hbaseConf)
     bulkLoader.doBulkLoad(new Path(hFilePath), admin, table, regionLocator)
 

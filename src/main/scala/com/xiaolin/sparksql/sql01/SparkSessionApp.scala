@@ -52,6 +52,7 @@ object SparkSessionApp {
   def json(spark: SparkSession) = {
     import spark.implicits._
     val df = spark.read.format("json").load("data/init/access.log")
+    df.createTempView("view_data")
     df.printSchema()
     println("........")
     //df.select("appId","platform","traffic","user")

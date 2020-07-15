@@ -9,17 +9,17 @@ object sparksql01 {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName(this.getClass.getSimpleName)
-      .master("local")
+      .master("local[2]")
       .getOrCreate()
 
     import spark.implicits._
 
-    val rdd = spark.sparkContext.textFile("data/dept.txt")
-    val df = rdd.map(x=>{
-      val splits = x.toString().split(",")
-      (splits(0),splits(1),splits(2))
-    }).toDF("deno","dename","address")
-    df.printSchema()
+//    val rdd = spark.sparkContext.textFile("data/dept.txt")
+//    val df = rdd.map(x=>{
+//      val splits = x.toString().split(",")
+//      (splits(0),splits(1),splits(2))
+//    }).toDF("deno","dename","address")
+//    df.printSchema()
     //获取参数配置
     val config = ConfigFactory.load()
     val url = config.getString("db.default.url")
@@ -27,13 +27,14 @@ object sparksql01 {
     val password = config.getString("db.default.password")
     val driver = config.getString("db.default.driver")
 
-    val jdbcRdd = df.write.mode(SaveMode.Overwrite).format("jdbc")
+    val jdbcRdd = spark.read.format("jdbc")
       .option("url",url)
-      .option("dbtable","dept")
+      .option("dbtable","test_time")
       .option("user",user)
       .option("password",password)
-      .save()
-
+      .load()
+    val array = jdbcRdd.select("create_time").map(x=> x.mkString).collect()
+   array.map(x=>println(x))
     spark.stop()
   }
 

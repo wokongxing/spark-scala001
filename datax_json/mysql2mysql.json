@@ -1,0 +1,59 @@
+{
+    "job": {
+        "setting": {
+            "speed": {
+                 "channel":1,
+				 "batchSize": "1024"
+            }
+        },
+        "content": [
+            {
+                "reader": {
+                    "name": "mysqlreader",
+                    "parameter": {
+                        "username": "spark",
+                        "password": "123456",
+                        "connection": [
+                            {
+                                "querySql": [
+                                    "select AREAID,PAREAID,AREAPY,MODTIME from SYS_AREA where PAREAID='330100';"
+                                ],
+                                "jdbcUrl": [
+                                    "jdbc:mysql://hadoop001:3306/sparkdb?characterEncoding=utf-8",
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "writer": {
+                    "name": "mysqlwriter",
+                    "parameter": {
+                        "writeMode": "update",
+                        "username": "spark",
+                        "password": "123456",
+                        "column": [
+                            "AREAID",
+                            "PAREAID",
+                            "AREAPY",
+                            "MODTIME"
+                        ],
+                        "session": [
+                        	"set session sql_mode='ANSI'"
+                        ],
+                        "preSql": [
+                            "delete from SYS_AREA01"
+                        ],
+                        "connection": [
+                            {
+                                "jdbcUrl": "jdbc:mysql://hadoop001:3306/sparkdb?useUnicode=true&characterEncoding=utf-8",
+                                "table": [
+                                    "SYS_AREA01"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}

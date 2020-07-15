@@ -1,0 +1,37 @@
+{
+    "job": {
+        "setting": {
+            "speed": {
+                 "channel":1
+            }
+        },
+        "content": [
+            {
+                "reader": {
+                    "name": "mysqlreader",
+                    "parameter": {
+                        "username": "spark",
+                        "password": "123456",
+                        "connection": [
+                            {
+                                "querySql": [
+                                    "select AREAID,PAREAID,AREAPY,MODTIME from SYS_AREA where PAREAID='330100';"
+                                ],
+                                "jdbcUrl": [
+                                    "jdbc:mysql://hadoop001:3306/sparkdb",
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "writer": {
+                    "name": "streamwriter",
+                    "parameter": {
+                        "print": true,
+                        "encoding": "UTF-8"
+                    }
+                }
+            }
+        ]
+    }
+}

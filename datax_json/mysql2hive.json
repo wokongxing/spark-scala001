@@ -1,0 +1,75 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 1
+      }, 
+      "errorLimit": {
+        "record": 0, 
+        "percentage": 0.02
+      }
+    }, 
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader", 
+          "parameter": {
+            "username": "zhajro",
+            "password": "ZhAjro1111",
+            "where": " is_deleted=1 and  DATEDIFF(last_modify_time,NOW())=-1",
+            "column": [
+    "id",
+      "code" ,
+      "name" ,
+      "cid" ,
+      "pid" ,
+      "create_time" ,
+      "create_user" ,
+      "last_modify_time" ,
+      "last_modify_user" ,
+      "parent_code" ,
+      "level" ,
+      "is_deleted" 
+            ],
+            "connection": [
+              {
+                "table": [
+                    "dict_area"
+              ],
+                "jdbcUrl": [
+                  "jdbc:mysql://47.97.54.146:3306/fgov_n"
+                ]
+              }
+            ]
+          }
+        }, 
+        "writer": {
+          "name": "hdfswriter", 
+          "parameter": {
+            "defaultFS": "hdfs://10.36.132.226:8020", 
+            "fileType": "ORC", 
+            "path": "/user/hive/warehouse/ods.db/huawei_fgov_n_dict_area_day",
+            "fileName": "huawei_fgov_n_dict_area_day",
+            "column": [
+                  {"name":"id","type":"int"},
+					{"name":"code","type":"string"},
+					{"name":"name","type":"string"},
+					{"name":"cid","type":"BIGINT"},
+					{"name":"pid","type":"BIGINT"},
+					{"name":"create_time","type":"timestamp"},
+					{"name":"create_user","type":"string"},
+					{"name":"last_modify_time","type":"timestamp"},
+					{"name":"last_modify_user","type":"string"},
+					{"name":"parent_code","type":"string"},
+					{"name":"level","type":"int"},
+					{"name":"is_deleted","type":"int"}
+			], 
+            "writeMode": "append", 
+            "fieldDelimiter": ","
+          }
+        }
+      }
+    ]
+  }
+}
+

@@ -4,6 +4,7 @@
   <artifactId>spark-scala</artifactId>
   <version>1.0</version>
   <inceptionYear>2008</inceptionYear>
+
   <repositories>
     <repository>
       <id>cloudera</id>

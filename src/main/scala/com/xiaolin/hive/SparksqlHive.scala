@@ -1,6 +1,6 @@
 package main.scala.com.xiaolin.hive
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{SparkSession, functions}
 
 object SparksqlHive {
   def main(args: Array[String]): Unit = {
@@ -20,7 +20,6 @@ object SparksqlHive {
           splits
         }).toDF()
 
-    df.printSchema()
     df.show(100)
 
 //    spark.sql(sql2).show(10)

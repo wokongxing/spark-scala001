@@ -1,4 +1,4 @@
-package main.scala.com.xiaolin.projectwork.one;
+package com.xiaolin.projectwork.one;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ import org.apache.spark.broadcast.Broadcast;
 
 
 /**
- * Created by J哥@www.ruozedata.com
+ * Created by
  * 功能: 主要是为了在spark streaming中更新一个广播变量
  *
  */
@@ -29,7 +29,7 @@ public class BroadcastAlert {
     }
 
 
-    public  Broadcast<List> updateAndGet(SparkSession sparkSession,Broadcast<List> bcAlertList){
+    public Broadcast<List<String>> updateAndGet(SparkSession sparkSession, Broadcast<List<String>> bcAlertList){
 
         Date currentDate = Calendar.getInstance().getTime();  //当前time
         long diff = currentDate.getTime()-lastUpdatedAt.getTime();//time差值

@@ -1,4 +1,4 @@
-package main.scala.com.xiaolin.projectwork.one
+package com.xiaolin.projectwork.one
 
 import java.util.{Calendar, Date}
 

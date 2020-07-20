@@ -1,4 +1,4 @@
-package main.scala.com.xiaolin.projectwork.one;
+package com.xiaolin.projectwork.one;
 
 
 
@@ -55,7 +55,7 @@ public class PreWarningtest {
     private static final Pattern regexSpace = Pattern.compile(" ");
 
     static String[] spiltstr;
-    static CDHRoleLog cdhRoleLog;
+    static com.xiaolin.projectwork.one.CDHRoleLog cdhRoleLog;
     static String sqlstr;
     static Timestamp recordTimestamp;
     static String key;
@@ -68,7 +68,7 @@ public class PreWarningtest {
 
     static List<String> alertList= new ArrayList<String>();
     static String alertsql="";
-    static Broadcast<List> bcAlertList ;
+    static Broadcast<List<String>> bcAlertList ;
 
     private static void preWarning(){
         try {

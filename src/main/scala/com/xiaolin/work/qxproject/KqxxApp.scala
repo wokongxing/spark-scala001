@@ -12,7 +12,7 @@ import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 object KqxxApp {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .master("local[4]")
+      .master("local[6]")
       .appName("SparkSessionApp")
       .getOrCreate()
 
@@ -28,27 +28,34 @@ object KqxxApp {
     ))
 //获取参数配置
     val config = ConfigFactory.load()
-    val url = config.getString("db.sptn.url")
-    val user = config.getString("db.sptn.user")
-    val password = config.getString("db.sptn.password")
+    val url = config.getString("pg.oucloud_ods.url")
+    val user = config.getString("pg.oucloud_ods.user")
+    val password = config.getString("pg.oucloud_ods.password")
     val driver = config.getString("db.sptn.driver")
-    val ryrdd = spark.sparkContext.textFile("file:///C:\\Users\\linzhy\\Desktop\\huawei\\企薪临时\\jkm_kaxx\\jkm_kaxx.txt")
+    val ryrdd = spark.sparkContext.textFile("file:///C:\\Users\\linzhy\\Desktop\\huawei\\住建数据处理\\jkm_rykq4_3228\\jkm_rykq4.txt")
       .map(x => {
         val splits = x.toString().split(",")
         if (splits.length == 7) {
-          Row(splits(0), splits(1), splits(2), DateUtils.changeFormat(splits(3)),splits(4), splits(5),splits(6))
+          var str3 = ""
+          if (!splits(3).isEmpty){
+            str3 = DateUtils.changeFormat(splits(3))
+          }
+          var str2 = splits(2)
+          if (str2 != null && str2.indexOf(0x00) > -1) {
+            str2 = splits(2).replace(0x00.toChar,' ').trim
+          }
+//          DateUtils.changeFormat(splits(3))
+          Row(splits(0), splits(1), str2, str3 ,splits(4), splits(5),splits(6))
         } else {
           Row(99)
         }
       }).filter(_.get(0)!=99)
-
     spark.createDataFrame(ryrdd,schema)
       .write
       .mode(SaveMode.Overwrite)
       .format("jdbc")
       .option("url",url)
-      .option("driver",driver)
-      .option("dbtable","jkm_kqxx_copy1")
+      .option("dbtable","jkm_kqxx")
       .option("user",user)
       .option("password",password)
       .save()

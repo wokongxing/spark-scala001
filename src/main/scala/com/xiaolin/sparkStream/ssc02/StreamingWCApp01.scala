@@ -21,7 +21,7 @@ object StreamingWCApp01 {
     //TODO... 填写我们的业务逻辑
 
     // Input:   socket  Input DStream
-    val lines = ssc.socketTextStream("ruozedata001",9999)
+    val lines = ssc.socketTextStream("hadoop001",9999)
 
 
 //    // transformation

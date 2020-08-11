@@ -12,21 +12,23 @@ object SparksqlHive {
       .enableHiveSupport() //启动hive读取配置文件中的
       .getOrCreate()
 //    val sql = "show tables"
-//    val sql2 ="select * from employee"
+    val sql2 ="select * from employee"
+    spark.sparkContext.getConf.get("reservedMemory")
+    val systemMemory = Runtime.getRuntime.maxMemory
     import spark.implicits._
-    val df = spark.read.format("text").load("data/datetime.text")
-        .map(x=>{
-          val splits = x.toString().split(",")
-          splits
-        }).toDF()
+//    val df = spark.read.format("text").load("data/datetime.text")
+//        .map(x=>{
+//          val splits = x.toString().split(",")
+//          splits
+//        }).toDF()
 
-    df.show(100)
+//    df.show(100)
 
-//    spark.sql(sql2).show(10)
-
-    val end_time = System.currentTimeMillis()
-    println(end_time-satrt_time )
-    println(spark.sparkContext.defaultParallelism )
+    spark.sql(sql2).show(10)
+//
+//    val end_time = System.currentTimeMillis()
+//    println(end_time-satrt_time )
+//    println(spark.sparkContext.defaultParallelism )
     spark.stop();
   }
 }

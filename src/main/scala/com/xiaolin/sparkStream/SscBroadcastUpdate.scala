@@ -4,6 +4,9 @@ import org.apache.spark._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
 
+/**
+ * 广播变量的变更
+ */
 object SscBroadcastUpdate {
 
   def main(args: Array[String]): Unit = {

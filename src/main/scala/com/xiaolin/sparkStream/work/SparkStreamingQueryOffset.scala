@@ -31,26 +31,26 @@ object SparkStreamingQueryOffset {
     )
 
     val topics = Array("pre")
-//    var stream : InputDStream[ConsumerRecord[String, String]] =_
+//    var stream : InputDStream[ConsumerRecord[String, String]] =_;
+//
 //    //获取偏移量
 //    val offsets = MysqlOffsetManager.obtainOffsets("pre","PREWARNING_1")
 //
 //    //从MySql中获取数据进行判断
 //    if(offsets.isEmpty){
-//      stream = KafkaUtils.createDirectStream[String, String](
-//              ssc,
-//              PreferConsistent,
-//              Subscribe[String, String](topics, kafkaParams)
-//          )
+//        stream = KafkaUtils.createDirectStream[String, String](
+//                ssc,
+//                PreferConsistent,
+//                Subscribe[String, String](topics, kafkaParams)
+//            )
 //    }else {
-//
-//     stream = KafkaUtils.createDirectStream[String, String](
-//        ssc,
-//        PreferConsistent,
-//        Subscribe[String, String](topics, kafkaParams, offsets)
-//      )
-//
+//       stream = KafkaUtils.createDirectStream[String, String](
+//          ssc,
+//          PreferConsistent,
+//          Subscribe[String, String](topics, kafkaParams, offsets)
+//        )
 //    }
+//    //
 //    stream.foreachRDD(rdd=>{
 //      val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
 //      //提交offset

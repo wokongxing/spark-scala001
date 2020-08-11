@@ -58,16 +58,16 @@ object RyxxApp {
           Row(99)
         }
       }).filter(_.get(0)!=99)
-
-    spark.createDataFrame(ryrdd,schema)
-      .write
-      .mode(SaveMode.Overwrite)
-      .format("jdbc")
-      .option("url",url)
-      .option("dbtable","temp_ryxx2")
-      .option("user",user)
-      .option("password",password)
-      .save()
+    println(ryrdd.getNumPartitions)
+//    spark.createDataFrame(ryrdd,schema)
+//      .write
+//      .mode(SaveMode.Overwrite)
+//      .format("jdbc")
+//      .option("url",url)
+//      .option("dbtable","temp_ryxx2")
+//      .option("user",user)
+//      .option("password",password)
+//      .save()
 //      .coalesce(1).foreach(x=>println(x))
 //      .toJavaRDD.rdd.saveAsTextFile("file:///C:\\Users\\linzhy\\Desktop\\huawei\\企薪临时\\jkm_ryxx_error.txt")
 //      .write.mode(SaveMode.Overwrite).format("text")

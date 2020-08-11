@@ -32,7 +32,7 @@ object DateUtils extends Logging {
     minute.substring(8, 10)
   }
   def changeFormat(date: String):String = {
-    SOURCE_TIME_FORMAT.format(TARGET_TIME_FORMAT.parse("20200319103706"))
+    SOURCE_TIME_FORMAT.format(TARGET_TIME_FORMAT.parse(date))
   }
 
   def main(args: Array[String]): Unit = {

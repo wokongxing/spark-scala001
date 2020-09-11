@@ -4,7 +4,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import org.elasticsearch.spark._
 import org.elasticsearch.spark.sql._
-object SparkEs {
+object SparkReadEs {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .appName("estest")

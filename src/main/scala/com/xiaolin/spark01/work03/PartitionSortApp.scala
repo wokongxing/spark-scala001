@@ -22,6 +22,7 @@ object PartitionSortApp {
     val urlpartitioner = new UrlPartitioner(sites)
 
     val reducerdd = rdd.reduceByKey(urlpartitioner, _ + _)
+    val reducerdd2 = rdd.aggregateByKey(0,2)
 
     reducerdd.mapPartitions(_.toList.sortBy(-_._2).map(x=>{
         (x._1._1,(x._1._2,x._2))

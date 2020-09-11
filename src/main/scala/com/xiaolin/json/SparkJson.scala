@@ -13,9 +13,7 @@ object SparkJson {
         |
         |""".stripMargin
 
-//    val spark = SparkSession.builder().master("local[2]").appName("json").getOrCreate()
-//
-//    val anotherPeopleDS : Dataset[String]=spark.sparkContext.parallelize("""{"name":"Yin","address":[{"city":"Columbus","state":"http://www.tom.com"},{"city":"Columbus2","state":"http://www.tom.com.cn"}]}"""::Nil)
+    val spark = SparkSession.builder().master("local[2]").appName("json").getOrCreate()
 //
 //    val resultDS = spark.read.json(anotherPeopleDS)
 //

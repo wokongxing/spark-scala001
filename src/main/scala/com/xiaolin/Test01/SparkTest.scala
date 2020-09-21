@@ -5,8 +5,8 @@ import main.scala.com.xiaolin.spark01.utils.ImplicitAspect._
 object SparkTest {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .master("local[2]")
-      .appName(this.getClass.getSimpleName)
+//      .master("local[2]")
+//      .appName(this.getClass.getSimpleName)
       .getOrCreate()
     //测试
     Test01(spark)

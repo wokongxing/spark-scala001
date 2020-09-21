@@ -41,4 +41,5 @@ public class RemoveLinkedListElements {
             val=x;
         }
     }
+
 }

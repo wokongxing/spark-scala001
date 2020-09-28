@@ -1,5 +1,6 @@
 package main.scala.com.xiaolin.spark01.core01
 import main.scala.com.xiaolin.spark01.utils.ImplicitAspect._
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable.ListBuffer
@@ -11,12 +12,39 @@ object RDDApp1 {
 
   def main(args: Array[String]): Unit = {
 
-    // step1: SparkConf
-    val sparkConf = new SparkConf().setAppName("RDDApp1").setMaster("local[2]")
-
-    // step2: SparkContext
+    val sparkConf = new SparkConf().setAppName(this.getClass.getSimpleName).setMaster("local[2]")
     val sc = new SparkContext(sparkConf)
-    sc.textFile("data/test.txt")
+
+
+    /** 数据集:
+     *    张三,李四,王五
+     *    小林,李四,张三
+     *  结果:
+     *    (张三,2)
+     *    (小林,1)
+     *    (李四,2)
+     *    (王五,1)
+     */
+
+    val wordRdd = sc.textFile("data/test.txt")
+    val wordRdd2 = sc.textFile("data/test.txt")
+
+    val wordsRdd: RDD[String] = wordRdd.flatMap(x => x.split(","))
+
+    val kvRdd: RDD[(String, Int)] = wordsRdd.map((_, 1))
+
+    val resultRdd: RDD[(String, Int)] = kvRdd.reduceByKey((_ + _))
+    resultRdd.foreach(println)
+
+    //笛卡尔积
+    resultRdd.cartesian(wordRdd2)
+    //uinon
+    wordRdd.union(wordRdd2)
+    //交集 shuffle
+    wordRdd.intersection(wordRdd2)
+    //差集 shuffle
+    wordRdd.subtract(wordRdd2)
+
     // step3: 处理业务逻辑
     //获取数据 对值 进行 年份降序 月份升序 排序
 //    val trafficsRdd = sc.textFile("data/traffics").map(x=>{

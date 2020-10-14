@@ -1,4 +1,4 @@
-package com.xiaolin.algorithm;
+package com.xiaolin.algorithm.link;
 
 /**
  * @program: spark-scala001
@@ -51,7 +51,13 @@ public class LeetCode143 {
         // 步骤 3: 合并前半部分链表以及反转后的后半部分链表
         mergeList(head, second);
     }
-    //反转
+
+    /**
+     * 获取后半段链表数据 并且反转
+     * 示例 : 123 =>321
+     * @param head
+     * @return
+     */
     private static ListNode reverseList(ListNode head) {
 
         ListNode prev = null, tmp = null, pointer = head;
@@ -65,6 +71,11 @@ public class LeetCode143 {
         return prev;
     }
 
+    /**
+     *  合并两个链表数据
+     * @param first
+     * @param second
+     */
     private static void mergeList(ListNode first, ListNode second) {
         ListNode dummy = new ListNode(0);
         ListNode pointer = dummy;

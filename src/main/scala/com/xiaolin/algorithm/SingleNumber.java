@@ -3,7 +3,7 @@ package com.xiaolin.algorithm;
 import java.util.HashMap;
 
 /**
- * @program: spark-scala001
+ * @program:  leetcode 136
  * @description: 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
  * 1.任何数和0异或，结果仍然时其原来的数       5^0:----5
  * 2.任何数和其自身做异或，结果是0            1^1:----0

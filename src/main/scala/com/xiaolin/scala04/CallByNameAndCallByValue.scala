@@ -6,7 +6,7 @@ package com.xiaolin.scala04
  * @author: linzy
  * @create: 2020-09-18 16:22
  **/
-object callbynameandcallbyvalue {
+object CallByNameAndCallByValue {
 
     var t=1
 

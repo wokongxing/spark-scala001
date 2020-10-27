@@ -27,23 +27,24 @@ object RDDApp1 {
      */
 
     val wordRdd = sc.textFile("data/test.txt")
-    val wordRdd2 = sc.textFile("data/test.txt")
+//    val wordRdd2 = sc.textFile("data/test.txt")
 
     val wordsRdd: RDD[String] = wordRdd.flatMap(x => x.split(","))
 
     val kvRdd: RDD[(String, Int)] = wordsRdd.map((_, 1))
 
-    val resultRdd: RDD[(String, Int)] = kvRdd.reduceByKey((_ + _))
+    val resultRdd = kvRdd.reduceByKey((_ + _)).map(x => (x._1, x._2 * 10))
     resultRdd.foreach(println)
 
-    //笛卡尔积
-    resultRdd.cartesian(wordRdd2)
-    //uinon
-    wordRdd.union(wordRdd2)
-    //交集 shuffle
-    wordRdd.intersection(wordRdd2)
-    //差集 shuffle
-    wordRdd.subtract(wordRdd2)
+    while(true) {}
+//    //笛卡尔积
+//    resultRdd.cartesian(wordRdd2)
+//    //uinon
+//    wordRdd.union(wordRdd2)
+//    //交集 shuffle
+//    wordRdd.intersection(wordRdd2)
+//    //差集 shuffle
+//    wordRdd.subtract(wordRdd2)
 
     // step3: 处理业务逻辑
     //获取数据 对值 进行 年份降序 月份升序 排序

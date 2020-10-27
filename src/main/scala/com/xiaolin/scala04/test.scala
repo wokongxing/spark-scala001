@@ -1,5 +1,7 @@
 package com.xiaolin.scala04
 
+import java.util.concurrent.{ConcurrentHashMap, ConcurrentMap}
+
 /**
  * 科理化 偏函数
  */
@@ -23,6 +25,7 @@ object test {
         case _=>"Other"
       }
     println(pf(1))
+
 
   }
     //柯里化

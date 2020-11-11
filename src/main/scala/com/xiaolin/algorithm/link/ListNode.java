@@ -7,9 +7,8 @@ package com.xiaolin.algorithm.link;
  * @create: 2020-10-26 17:45
  **/
 public  class ListNode{
-    int val;
-    ListNode next;
-    public ListNode() {}
+      int val;
+      ListNode next;
     public ListNode(int x){
         val=x;
     }

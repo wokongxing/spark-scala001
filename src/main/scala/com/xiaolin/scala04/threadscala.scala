@@ -9,7 +9,7 @@ import scala.util.control.NonFatal
 
 /**
  * @program: spark-scala001
- * @description:
+ * @description: 实验  LinkedBlockingQueue  队列 堵塞demo
  * @author: linzy
  * @create: 2020-10-21 11:27
  **/

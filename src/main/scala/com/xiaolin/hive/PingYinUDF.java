@@ -1,7 +1,8 @@
-package xiaolin.hive;
+package com.xiaolin.hive;
 
+import com.xiaolin.utils.PinYin4jUtils;
 import org.apache.hadoop.hive.ql.exec.UDF;
-import xiaolin.utils.PinYin4jUtils;
+
 
 public class PingYinUDF extends UDF {
     public String evaluate(String input) {

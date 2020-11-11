@@ -32,6 +32,7 @@ object RDDApp1 {
     val wordsRdd: RDD[String] = wordRdd.flatMap(x => x.split(","))
 
     val kvRdd: RDD[(String, Int)] = wordsRdd.map((_, 1))
+    kvRdd.persist()
 
     val resultRdd = kvRdd.reduceByKey((_ + _)).map(x => (x._1, x._2 * 10))
     resultRdd.foreach(println)

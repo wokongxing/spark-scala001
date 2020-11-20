@@ -35,10 +35,11 @@ object SparksqlHive {
 
     val sql3 ="select * from test"
 //
-    spark.sql(sql)
-    spark.sql(sql1)
+//    spark.sql(sql)
+//    spark.sql(sql2).show()
+//    spark.sql(sql1)
     spark.sql(sql3).show()
-    spark.sql(sql2).show()
+
 
 
     spark.stop();

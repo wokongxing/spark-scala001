@@ -24,7 +24,10 @@ object LogApp {
           (platform,platform2)
       }).toDF("platform","platform2")
 
-      df.show()
+      df.createOrReplaceTempView("test")
+    import spark.sql
+
+    sql("select * from test")
       // 如果你想使用SQL来进行处理，那么就是将df注册成一个临时视图
 //    df.createOrReplaceTempView("log")
 //

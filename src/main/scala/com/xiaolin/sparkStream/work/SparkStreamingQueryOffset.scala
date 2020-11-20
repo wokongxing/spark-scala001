@@ -50,7 +50,7 @@ object SparkStreamingQueryOffset {
           Subscribe[String, String](topics, kafkaParams, offsets)
         )
     }
-    //
+
     stream.foreachRDD(rdd=>{
       val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
       //提交offset

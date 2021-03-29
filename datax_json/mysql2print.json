@@ -10,12 +10,12 @@
                 "reader": {
                     "name": "mysqlreader",
                     "parameter": {
-                        "username": "spark",
-                        "password": "123456",
+                        "username": "root",
+                        "password": "linzhy123456!@",
                         "connection": [
                             {
                                 "querySql": [
-                                    "select AREAID,PAREAID,AREAPY,MODTIME from SYS_AREA where PAREAID='330100';"
+                                    "select * from test ;"
                                 ],
                                 "jdbcUrl": [
                                     "jdbc:mysql://hadoop001:3306/sparkdb",

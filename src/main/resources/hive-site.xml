@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
+<!--    <property>-->
+<!--            <name>hive.metastore.uris</name>-->
+<!--            <value>thrift://hadoop001:9083</value>-->
+<!--    </property>-->
 <!--<property>-->
 <!--        <name>hive.exec.scratchdir</name>-->
 <!--        <value>hdfs://hadoop001:9000/tmp/hive</value>-->
@@ -15,7 +19,7 @@
 <!--</property>-->
 <!--<property>-->
 <!--        <name>javax.jdo.option.ConnectionUserName</name>-->
-<!--        <value>hive</value>-->
+<!--        <value>hadoop</value>-->
 <!--</property>-->
 <!--<property>-->
 <!--        <name>javax.jdo.option.ConnectionPassword</name>-->

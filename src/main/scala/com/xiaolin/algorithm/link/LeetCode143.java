@@ -2,7 +2,7 @@ package com.xiaolin.algorithm.link;
 
 /**
  * @program: spark-scala001
- * @description: 给定一个单链表 L：L0→L1→…→Ln-1→Ln，
+ * @description: leetcode 143 给定一个单链表 L：L0→L1→…→Ln-1→Ln，
  *               将其重新排列后变为：L0→Ln→L1→Ln-1→L2→Ln-2→…
  *          示例:
  *               给定链表 1->2->3->4, 重新排列为 1->4->2->3.

@@ -45,11 +45,12 @@ public class LRULinkHashMap extends LinkedHashMap {
 
         System.out.println("-------------最新访问的---------------------");
         map.get("c");
+        map.get("d");
         map.forEach((key,value) ->{
             System.out.println(key+":"+value);
         });
 
-        System.out.println("----------------------------------");
+        System.out.println("-------------保留最新访问的数据---------------------");
         map.put("e","433");
         map.put("f","444");
         map.forEach((key,value) ->{

@@ -16,7 +16,8 @@ import org.postgresql.core.BaseConnection
 import org.postgresql.ds.PGConnectionPoolDataSource
 import com.xiaolin.utils.DateUtils.SOURCE_TIME_FORMAT
 
-object PgSqlUtil extends Logging {
+
+ object PgSqlUtil extends Logging {
   /**
    * 保存数据到Pgsql--oucloud_ads(ADS层)
    * @param saveMode
@@ -202,7 +203,6 @@ object PgSqlUtil extends Logging {
     }catch {
       case e: Exception =>
         logError("Error in execution of insert. " + e.getMessage )
-        var a = e
         conn.rollback()
         insertError(connectionPool("OuCloud_ODS"),"insertOrUpdateToPgsql",e.getMessage)
     }finally {

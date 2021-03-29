@@ -2,8 +2,9 @@
     "job": {
         "setting": {
             "speed": {
-                 "channel":1,
-				 "batchSize": "1024"
+                 "channel":2,
+				 "batchSize": "3048",
+                 "record":-1
             }
         },
         "content": [
@@ -11,16 +12,23 @@
                 "reader": {
                     "name": "mysqlreader",
                     "parameter": {
-                        "username": "spark",
-                        "password": "123456",
+                        "username": "root",
+                        "password": "linzhy123456!@",
+                        "splitPk": "id",
+                        "column": [
+                            "id",
+                            "code",
+                            "name",
+                            "parentcode",
+                            "level",
+                            "concat(SUBSTR(code,1,4),'00') as code2"
+                        ],
                         "connection": [
                             {
-                                "querySql": [
-                                    "select AREAID,PAREAID,AREAPY,MODTIME from SYS_AREA where PAREAID='330100';"
-                                ],
                                 "jdbcUrl": [
-                                    "jdbc:mysql://hadoop001:3306/sparkdb?characterEncoding=utf-8",
-                                ]
+                                    "jdbc:mysql://hadoop001:3306/sparkdb?characterEncoding=utf-8&useSSL=false"
+                                ],
+                                "table":["dict_area"]
                             }
                         ]
                     }
@@ -29,25 +37,22 @@
                     "name": "mysqlwriter",
                     "parameter": {
                         "writeMode": "update",
-                        "username": "spark",
-                        "password": "123456",
+                        "username": "root",
+                        "password": "linzhy123456!@",
                         "column": [
-                            "AREAID",
-                            "PAREAID",
-                            "AREAPY",
-                            "MODTIME"
+                            "id",
+                            "code",
+                            "name",
+                            "parentcode",
+                            "level",
+                            "is_deleted"
                         ],
-                        "session": [
-                        	"set session sql_mode='ANSI'"
-                        ],
-                        "preSql": [
-                            "delete from SYS_AREA01"
-                        ],
+
                         "connection": [
                             {
-                                "jdbcUrl": "jdbc:mysql://hadoop001:3306/sparkdb?useUnicode=true&characterEncoding=utf-8",
+                                "jdbcUrl": "jdbc:mysql://hadoop001:3306/test_db?useUnicode=true&characterEncoding=utf-8&useSSL=false",
                                 "table": [
-                                    "SYS_AREA01"
+                                    "dict_area_2"
                                 ]
                             }
                         ]

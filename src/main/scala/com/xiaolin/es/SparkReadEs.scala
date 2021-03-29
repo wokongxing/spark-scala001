@@ -10,10 +10,13 @@ object SparkReadEs {
       .appName("estest")
       .master("local[2]")
       //.config("pushdown","true")
-      .config("es.nodes","47.99.208.29")
+//      .config("es.nodes","8.136.142.156")
+      .config("es.nodes","es-cn-0pp1dzzdw0029xc4y.public.elasticsearch.aliyuncs.com")
      // .config("es.index.auto.create", "true") //创建索引
-      .config("es.port","9201")
+      .config("es.port","9200")
       .config("es.nodes.wan.only","true")
+      .config("es.net.http.auth.user", "test") //访问es的用户名
+      .config("es.net.http.auth.pass", "hw191118") //访问es的密码
       .getOrCreate()
 
 //    val numbers = Map("one" -> 1, "two" -> 2, "three" -> 3)
@@ -28,6 +31,7 @@ object SparkReadEs {
     //core
     val index = s"test/product"
     val index2 = s"ousutec-attendance-debug/clockin-record-debug"
+    val index3= s"ousutec-crane-new/"
 //    val query =
 //      """
 //        |{
@@ -41,33 +45,35 @@ object SparkReadEs {
 //        |  }
 //        |}
 //        |""".stripMargin
-//    val query2 =
-//      """
-//        |{
-//        |  "query": {
-//            "bool": {
-//        |      "must": [
-//        |       {"match": { "direct": "1"}},
-//        |        {"match": { "pid": "81630"}}
-//        |      ]
-//        |    }
-//        |  },
-//        |  "size": 20,
-//        |  "sort": [
-//        |    {
-//        |      "record_time": {
-//        |        "order": "desc"
-//        |      }
-//        |    }
-//        |  ]
-//        |}
-//        |""".stripMargin
+    val query2 =
+      """
+        |{
+        |  "query": {
+        |    "bool": {
+        |      "must": [
+        |        {
+        |          "terms": {
+        |            "craneId.keyword": [
+        |              "hm320220110002",
+        |              "09051411",
+        |              "09051424",
+        |              "hm320220110003",
+        |              "hm320220110001"
+        |            ]
+        |          }
+        |
+        |        }
+        |      ]
+        |    }
+        |  }
+        |}
+        |""".stripMargin
 //
-//    val testrdd: RDD[(String, collection.Map[String, AnyRef])] = spark.sparkContext.esRDD(index2, query2)
-//    testrdd.foreach(println)
+    val testrdd: RDD[(String, collection.Map[String, AnyRef])] = spark.sparkContext.esRDD(index3, query2)
+    testrdd.foreach(println)
 
     //sql
-    val frame = spark.esDF(index2).where("record_time > to_timestamp('2020-01-03')")
+//    val frame = spark.esDF(index2).where("record_time > to_timestamp('2020-01-03')")
     //frame.cache()
 
 //    frame.createOrReplaceTempView("attendance")
@@ -78,8 +84,8 @@ object SparkReadEs {
 //
 //    val dataFrame = spark.sql(sql)
 //    dataFrame.printSchema()
-    frame.show(10)
-    Thread.sleep(100000)
+//    frame.show(10)
+//    Thread.sleep(100000)
     spark.stop()
   }
 }

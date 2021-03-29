@@ -1,4 +1,4 @@
-package xiaolin.kylin;
+package com.xiaolin.kylin;
 
 import java.sql.Connection;
 import java.sql.Driver;

@@ -19,13 +19,10 @@ object InsertOrUpdateTest {
       .appName(this.getClass.getSimpleName)
       .master("local[2]")
       .config("spark.debug.maxToStringFields","100")
-      .config("spark.serializer","org.apache.spark.serializer.KryoSerializer")
+     .config("spark.serializer","org.apache.spark.serializer.KryoSerializer")
       .getOrCreate()
 
     var config = ConfigFactory.load()
-    val ods_url = config.getString("pg.oucloud_ods.url")
-    val ods_user = config.getString("pg.oucloud_ods.user")
-    val ods_password = config.getString("pg.oucloud_ods.password")
     val ads_url = config.getString("pg.oucloud_ads.url")
     val ads_user = config.getString("pg.oucloud_ads.user")
     val ads_password = config.getString("pg.oucloud_ads.password")
@@ -38,14 +35,6 @@ object InsertOrUpdateTest {
       .option("password", ads_password)
       .load()
 
-    val kq_attendances = spark.read.format("jdbc")
-      .option("url", ods_url)
-      .option("dbtable", "kq_attendances")
-      .option("user", ods_user)
-      .option("password", ods_password)
-      .load()
-
-    kq_attendances.createOrReplaceTempView("kq_attendances")
     ads_companys_total.createOrReplaceTempView("ads_companys_total")
 
     val sql=
@@ -57,11 +46,11 @@ object InsertOrUpdateTest {
         |""".stripMargin
 
     val dataFrame = spark.sql(sql)
-    dataFrame.printSchema()
-//    dataFrame.show(100)
+
+    dataFrame.show(100)
     //批量保存数据,存在则更新 不存在 则插入
     val conn = PgSqlUtil.connectionPool("OuCloud_ADS")
-    PgSqlUtil.insertOrUpdateToPgsql(conn,dataFrame,spark.sparkContext,"ads_companys_total","pkid")
+    PgSqlUtil.insertOrUpdateToPgsql(conn,dataFrame,spark.sparkContext,"ads_companys_total_temp","pkid")
 
     spark.stop();
   }

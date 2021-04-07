@@ -1,4 +1,4 @@
-package com.xiaolin.algorithm;
+package com.xiaolin.algorithm.array;
 
 
 /**

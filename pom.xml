@@ -16,6 +16,16 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+<!--    <repository>-->
+<!--      <id>aliyun</id>-->
+<!--      <url>https://maven.aliyun.com/nexus/content/groups/public/</url>-->
+<!--      <releases>-->
+<!--        <enabled>true</enabled>-->
+<!--      </releases>-->
+<!--      <snapshots>-->
+<!--        <enabled>false</enabled>-->
+<!--      </snapshots>-->
+<!--    </repository>-->
   </repositories>
 
   <properties>
@@ -45,6 +55,11 @@
 <!--           </exclusion>-->
 <!--         </exclusions>-->
      </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-streaming_2.11</artifactId>
@@ -204,12 +219,20 @@
       <version>1.1.1</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-client 4.10.0-cdh5.12.0-->
+    <!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-core -->
     <dependency>
       <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix-client</artifactId>
-      <version>4.14.0-cdh5.14.2</version>
+      <artifactId>phoenix-client-hbase-2.3</artifactId>
+      <version>5.1.1</version>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>com.google.guava</groupId>-->
+<!--          <artifactId>guava</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
     </dependency>
+
+
 
 
     <!--datax- -->

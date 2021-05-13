@@ -45,7 +45,7 @@ public class apiTest {
 //        System.out.println((char) fsDataInputStream.readByte());
 //        System.out.println((char) fsDataInputStream.readByte());
 //        System.out.println((char) fsDataInputStream.readByte());
-
+        //获取文件元数据
         BlockLocation[] blockLocations = fs.getFileBlockLocations(outf, 0L, fs.getFileStatus(outf).getLen());
         for (BlockLocation b : blockLocations){
             System.out.println(Arrays.toString(b.getStorageIds()));

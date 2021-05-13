@@ -1,4 +1,4 @@
-package xiaolin.json;
+package com.xiaolin.hive;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

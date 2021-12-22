@@ -3,9 +3,7 @@ package com.xiaolin.sparksql.sql01
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 
-/**
-  * 讲师：PK哥   交流群：545916944
-  */
+
 object RDDApp {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()

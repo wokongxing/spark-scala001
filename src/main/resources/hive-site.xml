@@ -25,11 +25,11 @@
 <!--        <name>javax.jdo.option.ConnectionPassword</name>-->
 <!--        <value>123456</value>-->
 <!--</property>-->
-<!--<property>-->
-<!--        <name>hive.metastore.warehouse.dir</name>-->
-<!--      <value>hdfs://hadoop001:9000/hive/warehouse</value>-->
-<!--        <description>location of default database for the warehouse</description>-->
-<!--</property>-->
+<property>
+        <name>hive.metastore.warehouse.dir</name>
+      <value>hdfs://hadoop001:9000/hive/warehouse</value>
+        <description>location of default database for the warehouse</description>
+</property>
 <!--<property>-->
 <!--        <name>javax.jdo.option.Multithreaded</name>-->
 <!--        <value>true</value>-->

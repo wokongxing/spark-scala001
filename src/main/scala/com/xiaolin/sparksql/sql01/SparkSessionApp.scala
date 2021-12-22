@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 
 /**
-  * 讲师：PK哥   交流群：545916944
+  *
   */
 object SparkSessionApp {
   def main(args: Array[String]): Unit = {

@@ -218,6 +218,11 @@
       <artifactId>hive-exec</artifactId>
       <version>2.3.4</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-cli</artifactId>
+      <version>1.1.1</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.phoenix/phoenix-core -->
     <dependency>
@@ -230,10 +235,9 @@
 <!--          <artifactId>guava</artifactId>-->
 <!--        </exclusion>-->
 <!--      </exclusions>-->
+
+      <!-- https://mvnrepository.com/artifact/com.github.hazendaz.spotbugs/spotbugs-maven-plugin -->
     </dependency>
-
-
-
 
     <!--datax- -->
 <!--    <dependency>-->
@@ -283,6 +287,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 

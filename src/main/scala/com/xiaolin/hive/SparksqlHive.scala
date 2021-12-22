@@ -12,18 +12,18 @@ import org.apache.spark.sql.{SparkSession, functions}
 object SparksqlHive {
   def main(args: Array[String]): Unit = {
 
-    System.setProperty("HADOOP_USER_NAME", "root")
+//    System.setProperty("HADOOP_USER_NAME", "root")
 
     val spark = SparkSession.builder()
       .appName(this.getClass.getSimpleName)
       .master("local[2]")
      .config("dfs.client.use.datanode.hostname", "true") //以域名的方式返回 访问 相互通信
-//      .config("hive.metastore.uris", "thrift://hadoop001:9083")
+     .config("hive.metastore.uris", "thrift://hadoop001:9083")
       .enableHiveSupport() //启动hive读取配置文件中的
       .getOrCreate()
 
 
-    spark.sparkContext.setLogLevel("INFO")
+    spark.sparkContext.setLogLevel("error")
     val sql2 ="show tables"
     //ddl
     val sql ="create table person7 (id int, code string, name string)"
@@ -33,11 +33,11 @@ object SparksqlHive {
         | insert into test values ('xiaolin',4),('xiaowang',2)
         |""".stripMargin
 
-    val sql3 ="select * from test"
+    val sql3 ="select * from area2"
 //
-    spark.sql(sql)
+//    spark.sql(sql)
     spark.sql(sql2).show()
-    spark.sql(sql1)
+//    spark.sql(sql1)
     spark.sql(sql3).show()
 
 

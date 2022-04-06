@@ -1,21 +1,26 @@
 package com.xiaolin.utils;
 
-import org.lionsoul.ip2region.DataBlock;
-import org.lionsoul.ip2region.DbConfig;
-import org.lionsoul.ip2region.DbSearcher;
-import org.lionsoul.ip2region.Util;
+import org.lionsoul.ip2region.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 
 public class  Ip2Util {
+    private static DbSearcher searcher=null;
+     private static  int algorithm = DbSearcher.BTREE_ALGORITHM; //B-tree
 
     public static void main(String[] args) {
         //中国|0|上海|上海市|有线通
+        searcher=init();
+
         System.out.println(getAaddressByIp("121.76.22.101"));
+        destory();
     }
-    public static String getAaddressByIp(String ip){
+
+    public static DbSearcher init() {
         //db
         String dbPath = Ip2Util.class.getResource("/ip2region.db").getPath();
         //String dbPath = "/home/hadoop/data/ip2region.db";
@@ -27,13 +32,23 @@ public class  Ip2Util {
         }
 
         //查询算法
-        int algorithm = DbSearcher.BTREE_ALGORITHM; //B-tree
         //DbSearcher.BINARY_ALGORITHM //Binary
         //DbSearcher.MEMORY_ALGORITYM //Memory
-        try {
-            DbConfig config = new DbConfig();
-            DbSearcher searcher = new DbSearcher(config, dbPath);
 
+        DbConfig config = null;
+        try {
+            config = new DbConfig();
+            return new DbSearcher(config, dbPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (DbMakerConfigException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static String getAaddressByIp(String ip)   {
+
+        try {
             //define the method
             Method method = null;
             switch ( algorithm )
@@ -63,6 +78,14 @@ public class  Ip2Util {
         }
 
         return null;
+    }
+
+    public static void destory(){
+        try {
+            searcher.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
